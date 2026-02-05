@@ -1,46 +1,17 @@
 {
   "name": "AzuraCast on Heroku",
-  "description": "Self-hosted web radio management suite running in a Docker container on Heroku",
-  "keywords": [
-    "azuracast",
-    "radio",
-    "streaming",
-    "docker",
-    "broadcasting"
-  ],
-  "website": "https://www.azuracast.com/",
+  "description": "Deploy AzuraCast, a self-hosted web radio management suite, on Heroku using Docker containers.",
   "repository": "https://github.com/santi-rios/ladoB",
   "logo": "https://www.azuracast.com/img/logo.png",
-  "success_url": "/",
+  "keywords": [
+    "radio",
+    "streaming",
+    "azuracast",
+    "music",
+    "web-radio",
+    "docker"
+  ],
   "stack": "container",
-  "env": {
-    "BASIC_AUTH_USER": {
-      "description": "Username for basic authentication (optional, but recommended to restrict access to friends)",
-      "value": "",
-      "required": false
-    },
-    "BASIC_AUTH_PASSWORD": {
-      "description": "Password for basic authentication (optional, but recommended to restrict access to friends)",
-      "value": "",
-      "required": false
-    },
-    "ENABLE_REDIS": {
-      "description": "Enable Redis for caching",
-      "value": "true",
-      "required": true
-    },
-    "ENABLE_ADVANCED_FEATURES": {
-      "description": "Enable advanced AzuraCast features",
-      "value": "true",
-      "required": false
-    }
-  },
-  "formation": {
-    "web": {
-      "quantity": 1,
-      "size": "standard-2x"
-    }
-  },
   "addons": [
     {
       "plan": "heroku-postgresql:mini",
@@ -51,5 +22,32 @@
       "as": "REDIS"
     }
   ],
-  "buildpacks": []
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "standard-2x"
+    }
+  },
+  "env": {
+    "BASIC_AUTH_USER": {
+      "description": "Username for basic HTTP authentication (recommended for restricting access)",
+      "required": false
+    },
+    "BASIC_AUTH_PASSWORD": {
+      "description": "Password for basic HTTP authentication (recommended for restricting access)",
+      "required": false
+    },
+    "ENABLE_REDIS": {
+      "description": "Enable Redis caching",
+      "value": "true",
+      "required": true
+    },
+    "ENABLE_ADVANCED_FEATURES": {
+      "description": "Enable advanced AzuraCast features",
+      "value": "true",
+      "required": false
+    }
+  },
+  "buildpacks": [],
+  "image": "heroku/heroku:24"
 }
