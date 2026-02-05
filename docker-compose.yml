@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      # Optional: Set these for testing basic authentication locally
+      - BASIC_AUTH_USER=testuser
+      - BASIC_AUTH_PASSWORD=testpass
+      # AzuraCast configuration
+      - ENABLE_REDIS=true
+      - ENABLE_ADVANCED_FEATURES=true
+      - PORT=80
+      # Database connection
+      - DATABASE_URL=postgresql://azuracast:azuracast@db:5432/azuracast
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - azuracast_data:/var/azuracast/www
+
+  db:
+    image: postgres:14-alpine
+    environment:
+      - POSTGRES_USER=azuracast
+      - POSTGRES_PASSWORD=azuracast
+      - POSTGRES_DB=azuracast
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis_data:/data
+
+volumes:
+  azuracast_data:
+  postgres_data:
+  redis_data:
