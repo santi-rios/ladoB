@@ -15,19 +15,14 @@
   "stack": "container",
   "env": {
     "BASIC_AUTH_USER": {
-      "description": "Username for basic authentication (optional, but recommended to restrict access)",
+      "description": "Username for basic authentication (optional, but recommended to restrict access to friends)",
       "value": "",
       "required": false
     },
     "BASIC_AUTH_PASSWORD": {
-      "description": "Password for basic authentication (optional, but recommended to restrict access)",
+      "description": "Password for basic authentication (optional, but recommended to restrict access to friends)",
       "value": "",
       "required": false
-    },
-    "AZURACAST_HTTP_PORT": {
-      "description": "HTTP port for AzuraCast",
-      "value": "8080",
-      "required": true
     },
     "ENABLE_REDIS": {
       "description": "Enable Redis for caching",

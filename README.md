@@ -90,9 +90,9 @@ You can customize your deployment using these environment variables:
 |----------|-------------|---------|----------|
 | `BASIC_AUTH_USER` | Username for basic HTTP authentication | - | No |
 | `BASIC_AUTH_PASSWORD` | Password for basic HTTP authentication | - | No |
-| `AZURACAST_HTTP_PORT` | HTTP port for AzuraCast | 8080 | Yes |
 | `ENABLE_REDIS` | Enable Redis caching | true | Yes |
 | `ENABLE_ADVANCED_FEATURES` | Enable advanced features | true | No |
+| `PORT` | HTTP port (auto-assigned by Heroku) | - | Auto |
 
 ### Updating Configuration
 
@@ -152,6 +152,30 @@ heroku addons -a your-app-name
 - **AzuraCast Documentation**: https://docs.azuracast.com/
 - **AzuraCast GitHub**: https://github.com/AzuraCast/AzuraCast
 - **Heroku Documentation**: https://devcenter.heroku.com/
+
+## Local Testing
+
+Before deploying to Heroku, you can test the setup locally using Docker Compose:
+
+```bash
+# Build and start the services
+docker-compose up --build
+
+# Access AzuraCast at http://localhost:8080
+# Default credentials for local testing:
+# Username: testuser
+# Password: testpass
+```
+
+To stop the services:
+```bash
+docker-compose down
+```
+
+To remove all data and start fresh:
+```bash
+docker-compose down -v
+```
 
 ## License
 

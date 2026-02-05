@@ -1,22 +1,28 @@
 # Use AzuraCast's official Docker image
 FROM ghcr.io/azuracast/azuracast:latest
 
-# Heroku requires binding to $PORT
-ENV PORT=8080
-EXPOSE 8080
-
 # Set up working directory
 WORKDIR /var/azuracast
 
-# AzuraCast requires certain environment variables
-ENV AZURACAST_HTTP_PORT=8080 \
-    AZURACAST_HTTPS_PORT=8443 \
+# AzuraCast configuration for Heroku
+# Note: Heroku assigns a dynamic $PORT, but AzuraCast expects port 80/8080
+ENV AZURACAST_HTTP_PORT=80 \
+    AZURACAST_HTTPS_PORT=443 \
     AZURACAST_SFTP_PORT=2022 \
     ENABLE_REDIS=true \
     ENABLE_ADVANCED_FEATURES=true
 
-# Create startup script that configures basic auth if credentials are set
-COPY docker-entrypoint.sh /docker-entrypoint.sh
-RUN chmod +x /docker-entrypoint.sh
+# Install additional tools for basic auth setup
+RUN apt-get update && \
+    apt-get install -y apache2-utils && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
+# Copy startup script that configures basic auth and port mapping
+COPY docker-entrypoint.sh /heroku-entrypoint.sh
+RUN chmod +x /heroku-entrypoint.sh
+
+# Expose default port (Heroku will map to dynamic $PORT)
+EXPOSE 80
+
+ENTRYPOINT ["/heroku-entrypoint.sh"]
