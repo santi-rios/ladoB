@@ -14,8 +14,8 @@ services:
       - ENABLE_ADVANCED_FEATURES=true
       - PORT=80
       # Database connection
-      - DATABASE_URL=postgresql://azuracast:azuracast@db:5432/azuracast
-      - REDIS_URL=redis://redis:6379
+      # - DATABASE_URL=postgresql://azuracast:azuracast@db:5432/azuracast
+      # - REDIS_URL=redis://redis:6379
     depends_on:
       - db
       - redis
