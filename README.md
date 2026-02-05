@@ -15,7 +15,7 @@ AzuraCast is a free and open-source self-hosted web radio management suite. It a
 
 Click the button below to deploy AzuraCast to Heroku:
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/santi-rios/ladoB)
 
 ### Deployment Steps
 
